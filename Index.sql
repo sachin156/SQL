@@ -1,0 +1,2 @@
+---Index types..
+--- different index types B-tree,GiST,SP-GIST,GIN and BRIN

@@ -42,7 +42,8 @@ select name || ''|| coalesce(animal,'') as animalname from pets;
  sno
 */
 
-select id,age, coalesce(name,animal) animalname from pets;
+--want to pick any of name or animal, if both are in null state then NA will be assigned..
+select id,age, coalesce(name,animal,'NA') animalname from pets;
 
 
 /* get  output
@@ -64,8 +65,37 @@ select id,age, coalesce(name,animal) animalname from pets;
 */
 
 ---alter the data based on the condition more of if else condition statement 
-   ---generally used as when then as key word to alter the data
-   ---
-  
+   ---generally used as (when ,then)as key word to alter the data
+ 
+select id,age case when animal not null then animal
+when name is not null then name 
+else 'NA'
+animalname
+from pets;
+
+/* get  output
+
+ id | age | animalname 
+----+-----+------------
+  1 | 1   | bonkers
+  2 | 9   | Moon
+  3 | 7   | Ripley
+  4 | 1   | Tom
+  5 | 9   | Maisie
+  6 | 7   | sara
+  7 | 1   | miley
+  8 | 3   | perthy
+  9 | 2   | sno
+ 10 | 1   | Cat
+ 11 | 1   | NA
+
+*/
+
+---NULLIF, returns the null value if two parameter are equal otherwise the first expression 
+ ---NULLIF(1,2) is same as CASE WHEN exp1=exp2 then null else exp1 end
+select nullif(1,1) /* NULL*/
+select nullif('a','b') /* a*/
+
+ 
 
 
