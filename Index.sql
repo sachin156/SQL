@@ -138,9 +138,38 @@ insert into machine_type values(2,'subaru','st','2014-01-10','2015-01-01');
  ---Im memory use,development for many non balanced disk based structures.
  ---sp-Gist can be used in exclusion constraints
 
----------------------------------------------------
+------------------------------------------------------
 ----BRIN indexes (blocked range index)
- --group of pages adjacent to each other 
+ ---group of pages adjacent to each other where summary of all the pages are stored in index.
+ ---mostly to reduce the storage size of the index
+
+CREATE TABLE testtab (id int NOT NULL PRIMARY KEY,date TIMESTAMP NOT NULL, level INTEGER, msg TEXT);
+
+/* by default the index is b tree for id or date so by using b-tree occupies 17mb is required  for 800k rows indexing but brin
+ ---uses only 48kb as index size (which decreases the ratio of index to table size) which might effect efficiency
+*/
+create index testtab_date on testtab(data);
+di+ testtab_date;
+/*                         
+ List of relations
+ Schema |     Name     | Type  | Owner |  Table  | Size  | Description 
+--------+--------------+-------+-------+---------+-------+-------------
+ public | testtab_date | index | test  | testtab | 17 MB | 
+*/
+create index testtabdata_brin on testtab using brin(date);
+
+\di+ testtabdata_brin;
+/*
+                             List of relations
+ Schema |       Name       | Type  | Owner |  Table  | Size  | Description 
+--------+------------------+-------+-------+---------+-------+-------------
+ public | testtabdata_britn | index | test  | testtab | 48 kB | 
+
+Not efficient as fully cached b Tree index, there will be performance improvement with fewer resources..
+*/
+
+---Comparing btree and brin on select query the execution time is less for b tree.... on the above table.
+
 
 
 
