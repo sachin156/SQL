@@ -132,6 +132,7 @@ insert into machine_type values(2,'subaru','st','2008-01-10','2013-01-01');
 DETAIL:  Key (mtname, daterange(start_date, end_date))=(subaru, [2008-01-10,2013-01-01)) conflicts with existing key (mtname, daterange(start_date, end_date))=(subaru, [2008-01-10,2013-01-01)).
 */
 insert into machine_type values(2,'subaru','st','2014-01-10','2015-01-01');
+--insert 0 1
 
 ---------------------------------------------------
 ----SP-Gist(Space Partitioned GiST)

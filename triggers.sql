@@ -1,0 +1,4 @@
+----Triggers
+ ---function which is invoked whenever an event associated with table occurs (automatically invoked)
+ ---create a triger (which is user defined function) and bind this to table
+ ---row and statement level triggers 

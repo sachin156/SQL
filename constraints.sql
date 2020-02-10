@@ -51,3 +51,13 @@ ERROR:  insert or update on table "orders" violates foreign key constraint "orde
 DETAIL:  Key (produc_no)=(4) is not present in table "newtest"
 */
 insert into orders values(1,3,1);
+ ---A table can contain multiple foreign keys which is used to implement many to many relationships betweeen tables 
+ ---restrict prevents deletion of a reference rows.
+ ---cascading is when a referecned row is deleted, rows referencing it should be automatically deleted.
+create table order_items(product_no integer references id on delete restrict,
+order_id integer references orders on delete cascade,msg text,primary key(product_no,order_id));
+ ---deleting the rows of newtest will give error as it is restricting the reference id..
+ ---But the deletion can be done when when order_id row is deleted (as it is cascaded)
+
+
+
