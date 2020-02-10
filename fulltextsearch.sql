@@ -1,7 +1,7 @@
 ---full text search 
  --refers to techniques for searching a single computer stored document 
  --like can be used to search the text in the documents but it has limitation like it wont go further than matching exact key word
-select * from table where compnay '%apple%' ---matches only with apples and wont consider (Apple,apples words as valid for the search)
+select * from table where company like '%apple%' ---matches only with apples and wont consider (Apple,apples words as valid for the search)
 
 
 /*to_tsvector -- which helps to set the language  settings and convert the tokens into standard tokens
