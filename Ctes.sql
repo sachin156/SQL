@@ -12,7 +12,7 @@ when sal>=5000 and sal<10000 then 'a2' when sal>=10000 then 'a3' end) sal_grade 
 select empno,empname,sal_grade from emp_grade where sal_grade='a3' order by empname;
 /*
  empno | empname | sal_grade 
--------+---------+-----------
+-------+---------+-----------`
    104 | bruce   | a3
    102 | lex     | a3
    101 | Neena   | a3

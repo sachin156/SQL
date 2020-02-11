@@ -48,7 +48,7 @@ select * from part_view;
 
  ---the definition of view can be changed without having to drop it
 create or replace view part_view as select * from part where id between 10 and 30;
- ---any change in the tables will effect the view also.a
+ ---any change in the tables will effect the view also.
  ---alter view statement changes the definition of an existing view..
 
 ----Materialized Views 
