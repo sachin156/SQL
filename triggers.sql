@@ -55,8 +55,6 @@ insert into price values(4,30);
 /*
  Error: Price should be greater than equal to 100
 */
----drop trigger
-  drop trigger price_trigger on price;
 
 ---update the trigger function using replace...
 
@@ -127,3 +125,14 @@ select id,ts_abstract from price where id=5;
   5 | 'famous':3 'honk':9 'seri':7 'sound':10
 
 */
+
+
+
+
+
+---drop trigger
+  drop trigger price_trigger on price;
+---
+price_check_trigger before insert or update on price for each row execute procedure person_bit()
+
+
