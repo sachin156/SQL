@@ -47,7 +47,7 @@ select animal, max(age) from pets group by animal having max(age) < 8;
 ---where and having ,where selects the rows before aggregates are computed thus it controls which rows go into the aggregate computation.
  ---having select the rows after aggregated are computed,, which always contains the aggregate functions always used with group by clause..
 
---Subqueries on emp and department table...
+--Subqueries on emp and department table...	
 select empno,empname from emp where dep_id=ANY 
  (select dep_id from department where loc_id=1700);
 ---any is used because each emp consists only id for department , in key word works the same in place of any.
