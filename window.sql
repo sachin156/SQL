@@ -1,6 +1,6 @@
 ----Window functions
  ---performs a calculation across a set of table rows which are related to current row..
- ---comparable as of aggregate functino but the rows retain their identities 
+ ---comparable as of aggregate function sleebut the rows retain their identities 
  ---the window function is able to access more than just the current row..
 select dep_id,empno,empname,avg(sal) over (partition by dep_id) from emp;
  --- same as aggreg function over causes the query to behave as window function

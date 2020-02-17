@@ -39,7 +39,7 @@ select distinct on (a) * from r;
 */
 
 
----both are useful disitinct rows from the table but distinct fetches single column whereas the distinct on
+---both are useful for distinct rows from the table but distinct fetches single column whereas the distinct on gets entire row (unique)
 
 
 
