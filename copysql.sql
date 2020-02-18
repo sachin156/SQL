@@ -14,5 +14,17 @@ copy emp to '/home/sachinv/data/newtest.csv' with(format csv,header);
 
 
 
+----Using copy to get only few columns to csv or to load only few columns into the table 
+
+copy emp(empno,empname,hourpay,sal) to '/home/sachinv/data/newtest.csv' with(format csv,header);
+
+---save table rows with few cols into .csv file
+
+copy temp(empno,empname,hourpay,sal) from '/home/sachinv/data/newtest.csv' delimiter ',' csv header;
+
+---save table with new data from csv file with few columns
+
+
+
 
 
