@@ -5,7 +5,7 @@
  ---comes into play when users are modifying the same rows , if modifying different rows then wait is not required.
 
  ---locks are automatically released at the end of a transaction.
- ---only access exclusive locks blocks a select statement.
+ ---only access exclusive locks blocks a select statement without for update/share
 ----using access exclusive locks 
 
 
@@ -87,7 +87,7 @@ update 2
 
 ---share
 ---this mode protect table against concurrent data changes..
-
+	
 ---share row exclusive,
 --protects table against concurrent data changes and only one session can hold it at a time
 
