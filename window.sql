@@ -212,7 +212,7 @@ select empno,empname,lead(numsales,1) over(partition by dep_id order by empno) f
 */
 
 ----Nth value 
- ---value from nth row in an ordered partitio of a result set.
+ ---value from nth row in an ordered partition of a result set.
 
 with nth_cte as(
 select empno,empname,sal,nth_value(empname,1) over(partition by dep_id order by empno) from emp)
@@ -239,6 +239,7 @@ select nth_cte.*,emp.sal from nth_cte inner join emp on emp.empname=nth_cte.nth_
 
 
 select empno,empname,dep_id,first_value(sal) over(partition by dep_id order by sal) from emp;
+--get the first sal from the group partition by dep_id and order by sal..(lowes)
 
 /*
  empno | empname | dep_id | first_value 
@@ -253,6 +254,11 @@ select empno,empname,dep_id,first_value(sal) over(partition by dep_id order by s
 */
 
 
+----last_value
+--last value is used to get the last value in the group
+--last_value(sal)
+
+select mpno,empname,dep_id,last_value(sal) over(partition by dep_id order by sal) from emp;
 
 
 
