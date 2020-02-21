@@ -75,4 +75,3 @@ select empno,empname,dno,dep_id from emp e where exists (select * from employees
 
 
 
-

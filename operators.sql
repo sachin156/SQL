@@ -1,9 +1,0 @@
----union,
----union all,
----intersect
----except
----in
----and
----or
----using and with or
----like operator

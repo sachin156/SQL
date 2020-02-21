@@ -37,11 +37,11 @@ select * from public.companyde
  ---Views are read only ,wont allow insert,delete or update on a view.
 /*  create view*/
 
-create view part_view as select * from part where partname='Part400000';
+create view part_view as select * from part where partname='Part:400000';
 
 select * from part_view;
 /*
-   id   |   partno   |  partname   | partdescr | machine_id 
+   id   |   partno   |  partname  sele | partdescr | machine_id 
 --------+------------+-------------+-----------+------------
  400000 | Pno:400000 | Part:400000 |           |          0
 */

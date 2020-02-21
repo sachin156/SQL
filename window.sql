@@ -1,6 +1,6 @@
 ----Window functions
  ---performs a calculation across a set of table rows which are related to current row..
- ---comparable as of aggregate function sleebut the rows retain their identities 
+ ---comparable as of aggregate function but the rows retain their identities 
  ---the window function is able to access more than just the current row..
 select dep_id,empno,empname,avg(sal) over (partition by dep_id) from emp;
  --- same as aggreg function over causes the query to behave as window function
@@ -125,6 +125,20 @@ select empno,empname,dep_id,row_number() over(partition by dep_id order by empno
  ----then the next row will be given different (1,2,2,4) ----if two rows are same 
  ----the same table with dense rank gives(1,2,2,3)
 
+select empno,empname,dep_id,rank() over(partition by dep_id order by sal) from emp;
+/*
+ empno | empname | dep_id | rank 
+-------+---------+--------+------
+   791 | ward    |     40 |    1
+   784 | alen    |     40 |    2
+   766 | smit    |     40 |    3
+   732 | kane    |     40 |    4
+    63 | ertun   |     90 |    1
+   100 | Steve   |     90 |    2
+   203 | mark    |     90 |    3
+*/
+
+
 
 
 ----NTILE
@@ -169,6 +183,18 @@ empno | empname |  lag
    100 | Steve   | 21.00
 */
 
+select id,price,abstract,lag(price,1) over(order by price) as prev_price,price-lag(price,1) over(order by price) as compared_price from price;
+/*
+ id | price |                      abstract                      | prev_price | compared_price 
+----+-------+----------------------------------------------------+------------+----------------
+  2 |   100 |                                                    |            |               
+  2 |   200 |                                                    |        100 |            100
+  3 |   300 |                                                    |        200 |            100
+  4 |   400 | Price of these vegetables are very high            |        300 |            100
+  1 |   500 | Price of the new vegetables                        |        400 |            100
+  5 |   600 | He is famous in both the series for honking sounds |        500 |            100
+*/
+
 
 
 ---lead to access the row which comes after the current row or row after 
@@ -176,15 +202,14 @@ empno | empname |  lag
 
 
 select empno,empname,lead(numsales,1) over(partition by dep_id order by empno) from emp;
+/*
  empno | empname | lead  
 -------+---------+-------
    732 | kane    | 20.00
    766 | smit    |  4.00
    784 | alen    | 10.00
    791 | ward    |   
-
-
-
+*/
 
 ----Nth value 
  ---value from nth row in an ordered partitio of a result set.
@@ -208,10 +233,24 @@ select nth_cte.*,emp.sal from nth_cte inner join emp on emp.empname=nth_cte.nth_
 
 */
 
+----First_value,last_value
+--gets the first value in the group
+--first_value(price) 
 
 
+select empno,empname,dep_id,first_value(sal) over(partition by dep_id order by sal) from emp;
 
-
+/*
+ empno | empname | dep_id | first_value 
+-------+---------+--------+-------------
+   791 | ward    |     40 |     1250.00
+   784 | alen    |     40 |     1250.00
+   766 | smit    |     40 |     1250.00
+   732 | kane    |     40 |     1250.00
+    63 | ertun   |     90 |    23000.00
+   100 | Steve   |     90 |    23000.00
+   203 | mark    |     90 |    23000.00
+*/
 
 
 

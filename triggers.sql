@@ -127,9 +127,6 @@ select id,ts_abstract from price where id=5;
 */
 
 
-
-
-
 ---drop trigger
   drop trigger price_trigger on price;
 ---
