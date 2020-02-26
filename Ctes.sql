@@ -82,4 +82,56 @@ id |  name   | manager_id
   9 | Katie   |          3
 */
 
+-----list total slots booked per facility..
+select facid,extract(month from starttime) as month,count(slots) as totalslots from booking where starttime>='2012-01-01' and starttime<='2012-12-21' group by rollup(facid,month) order by facid;
+
+/*
+ facid | month | totalslots 
+-------+-------+------------
+     0 |     1 |          1
+     0 |     2 |          4
+     0 |     3 |          1
+     0 |       |          6
+     1 |     2 |          1
+     1 |     3 |          1
+     1 |       |          2
+       |       |          8
+*/
+
+
+with slots_cte as (select facid,extract(month from starttime) as month,sum(slots) as slots from booking where starttime>='2012-01-01' and starttime<='2012-12-21' group by facid,month)
+select facid,month,slots from slots_cte 
+union 
+select facid,null,sum(slots) from booking where starttime>='2012-01-01' and starttime<='2012-12-21' group by facid order by facid,month;
+
+/*
+ facid | month | slots 
+-------+-------+-------
+     0 |     1 |     2
+     0 |     2 |     8
+     0 |     3 |     2
+     0 |       |    12
+     1 |     2 |     2
+     1 |     3 |     2
+     1 |       |     4
+     2 |     2 |     2
+     2 |     3 |     2
+     2 |       |     4
+
+*/
+
+
+select fks.faceid,fks.name,round(sum(bks.slots)/2.0,2) as "Total hours" from booking bks inner join facilites fks on fks.faceid=bks.facid group by fks.faceid,fks.name order by fks.faceid;
+
+/*
+ faceid |      name       | Total hours 
+--------+-----------------+-------------
+      0 | Tennis Court1   |        6.00
+      1 | Tennis Court2   |        3.00
+      2 | Badminton Court |        2.00
+      3 | Table Tennis    |        1.00
+      6 | Squash Court    |        1.00
+      7 | Snooker Table   |        2.50
+*/
+
 

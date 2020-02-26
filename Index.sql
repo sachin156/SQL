@@ -64,7 +64,7 @@ Time: 1.119 ms
  ---items could be documents and the queries could be search for documents containing specific words.(searching words in the documents ,text search)..
  ---
 
-update part set partdescr ='the cooling systen' where id=500000;
+update part set partdescr ='the cooling systen' where id=500	000;
 
 /*UPDATE 1
 Time: 834.049 ms
